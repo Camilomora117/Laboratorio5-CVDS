@@ -9,4 +9,5 @@
 + -v nos muestra toda la información del protocolo html
 + -i nos muestra todos los mensajes que intercambia el protocolo html
 ## Parte III
-+ 
++ La diferencia entre el POST y el GET es que en el POST no aparece el id=1, y con el GET si aparece el id=1.
++En el código de Service.java que vemos a continuación, el método todoToHTMLRow lo que hace es realizar las filas de la tabla, y el método todosToHTMLTable lo que hace es realizar las columnas de la tabla.
