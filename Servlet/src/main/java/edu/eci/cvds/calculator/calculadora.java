@@ -1,10 +1,9 @@
 package edu.eci.cvds.calculator;
 
-import java.util.ArrayList;
-import java.util.Random;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.*;
+
 
 @ManagedBean(name = "calculadoraBean")
 @ApplicationScoped
@@ -25,6 +24,61 @@ public class calculadora{
      */
     public calculadora(){}
 
+    public static String getCadenaEntrada() {
+        return cadenaEntrada;
+    }
+
+    public static double getResultadoMean() {
+        return resultadoMean;
+    }
+
+    public static void setResultadoMean(double resultadoMean) {
+        calculadora.resultadoMean = resultadoMean;
+    }
+
+    public static double getResultadoVariance() {
+        return resultadoVariance;
+    }
+
+    public static void setResultadoVariance(double resultadoVariance) {
+        calculadora.resultadoVariance = resultadoVariance;
+    }
+
+    public static double getResultadoStandardDeviation() {
+        return resultadoStandardDeviation;
+    }
+
+    public static void setResultadoStandardDeviation(double resultadoStandardDeviation) {
+        calculadora.resultadoStandardDeviation = resultadoStandardDeviation;
+    }
+
+    public static double getResultadoMode() {
+        return resultadoMode;
+    }
+
+    public static void setResultadoMode(double resultadoMode) {
+        calculadora.resultadoMode = resultadoMode;
+    }
+
+    public static double getCantidadNumero() {
+        return cantidadNumero;
+    }
+
+    public static void setCantidadNumero(double cantidadNumero) {
+        calculadora.cantidadNumero = cantidadNumero;
+    }
+
+    public static void setCadenaEntrada(String cadenaEntrada) {
+        calculadora.cadenaEntrada = cadenaEntrada;
+    }
+
+    public void calculateValues() {
+        calculateMean();
+        calculateMode();
+        calculateVariance();
+        calculateStandardDeviation();
+    }
+
     /**
      * Calcula promedio de los datos
      * @return Int que representa el promedio
@@ -41,40 +95,38 @@ public class calculadora{
 
     /**
      * Calcula promedio de los datos
-     * @return Int que representa el promedio
      */
-    public static double calculateMean() {
+    public static void calculateMean() {
         double[] m = cadenaADouble();
         double sum = 0;
         for (int i = 0; i < m.length; i++) {
             sum += m[i];
         }
         resultadoMean = sum / m.length;
-        return resultadoMean ;
     }
 
     /**
      * Calcula la varianza de los datos
-     * @return Int que representa la varianza
      */
-    public static double calculateVariance(){
+    public static void calculateVariance(){
         double[] m = cadenaADouble();
         double sqDiff = 0;
         double n = m.length;
-        for (int i = 0; i < n; i++)
-            sqDiff += (m[i] - calculateMean()) * (m[i] - calculateMean());
+        for (int i = 0; i < n; i++) {
+            calculateMean();
+            sqDiff += (m[i] - getResultadoMean()) * (m[i] - getResultadoMean());
+        }
         resultadoVariance = sqDiff/n;
-        return resultadoVariance;
     }
 
     /**
      * Calcula la desviacion estandar de los datos
      * @return Int que representa la desviacion estandar
      */
-    public static double calculateStandardDeviation(){
+    public static void calculateStandardDeviation(){
         double[] m = cadenaADouble();
-        resultadoStandardDeviation = Math.sqrt(calculateVariance());
-        return resultadoStandardDeviation;
+        calculateVariance();
+        resultadoStandardDeviation = Math.sqrt(getResultadoVariance());
     }
 
 
@@ -115,105 +167,6 @@ public class calculadora{
     }
 
 
-    /**
-     * Get Cadena Entrada
-     * @return String
-     */
-    public String getCadenaEntrada() {
-        return cadenaEntrada;
-    }
-
-    /**
-     * Set Cadena de Entrada
-     * @param cadenaEntrada String
-     */
-    public void setCadenaEntrada(String cadenaEntrada) {
-        this.cadenaEntrada = cadenaEntrada;
-    }
-
-    /**
-     * Get Resultado Operacion Mean
-     * @return Double Resultado Mean
-     */
-    public double getResultadoMean() {
-        return resultadoMean;
-    }
-
-    /**
-     * Set Resultado Mean
-     * @param resultadoMean Double
-     */
-    public void setResultadoMean(double resultadoMean) {
-        this.resultadoMean = resultadoMean;
-    }
-
-    /**
-     * Get Resultado Operacion Varianza
-     * @return Double Resultado varianza
-     */
-    public double getResultadoVariance() {
-        return resultadoVariance;
-    }
-
-    /**
-     * Set Resultado varianza
-     * @param resultadoVariance Double
-     */
-    public void setResultadoVariance(double resultadoVariance) {
-        this.resultadoVariance = resultadoVariance;
-    }
-
-
-    /**
-     * Get Resultado Desviacion Estandar
-     * @return Double de desviacion estandar
-     */
-    public double getResultadoStandardDeviation() {
-        return resultadoStandardDeviation;
-    }
-
-
-    /**
-     * Set Desviacion Estandar
-     * @param resultadoStandardDeviation Double
-     */
-    public void setResultadoStandardDeviation(double resultadoStandardDeviation) {
-        this.resultadoStandardDeviation = resultadoStandardDeviation;
-    }
-
-    /**
-     * Get Resultado Moda
-     * @return Double Resultado Moda
-     */
-    public double getResultadoMode() {
-        return resultadoMode;
-    }
-
-
-    /**
-     * Set Moda
-     * @param resultadoMode Double
-     */
-    public void setResultadoMode(double resultadoMode) {
-        this.resultadoMode = resultadoMode;
-    }
-
-
-    /**
-     * Get Cantidad de numeros
-     * @return Int Cantidad de Numeros
-     */
-    public double getCantidadNumero() {
-        return cantidadNumero;
-    }
-
-    /**
-     * Set Cantidad de Numeros
-     * @param cantidadNumero Int
-     */
-    public void setCantidadNumero(int cantidadNumero) {
-        this.cantidadNumero = cantidadNumero;
-    }
 
     @Override
     public String toString() {

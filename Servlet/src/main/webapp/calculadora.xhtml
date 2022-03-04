@@ -5,7 +5,7 @@
 <h:head>
     <style>
         #calculadora_form {
-            color: red;
+            color: #1f57b4;
         }
     </style>
 </h:head>
@@ -31,6 +31,7 @@
         <p:commandButton value="StandardDeviation" update="calculadora_form" action="#{calculadoraBean.calculateStandardDeviation()}"></p:commandButton>
         <p:commandButton value="Mode" update="calculadora_form" action="#{calculadoraBean.calculateMode()}"></p:commandButton>
         <p:commandButton value="Restart" update="calculadora_form" action="#{calculadoraBean.restart()}"></p:commandButton>
+        <p:commandButton value="Calculate Values" update="calculadora_form" action="#{calculadoraBean.calculateValues()}"></p:commandButton>
     </h:form>
 </h:body>
 </html>
